@@ -1,0 +1,6 @@
+{
+  "projects": [
+    { "id": "1", "name": "Code and Cravings", "description": "Restaurant Website", "tech": "HTML/CSS" },
+    { "id": "2", "name": "Calc-IT", "description": "JS Calculator", "tech": "JavaScript" }
+  ]
+}

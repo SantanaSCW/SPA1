@@ -1,34 +1,19 @@
-import React, { useState } from 'react';
-import ProjectList from './components/ProjectList';
-import ProjectForm from './components/ProjectForm';
-import SearchBar from './components/SearchBar';
-import './App.css';
-
-function App() {
-  const [projects, setProjects] = useState([
-    { id: 1, name: "Code and Cravings", description: "Restaurant Website", tech: "HTML/CSS" },
-    { id: 2, name: "Calc-IT", description: "JS Calculator", tech: "JavaScript" }
-  ]);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Function to add a new project
-  const addProject = (newProject) => {
-    setProjects([...projects, { ...newProject, id: Date.now() }]);
-  };
-
-  // Logic for the Search Feature
-  const filteredProjects = projects.filter(project =>
-    project.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <div className="container">
-      <h1>Agency Portfolio</h1>
-      <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-      <ProjectForm onAddProject={addProject} />
-      <ProjectList projects={filteredProjects} />
+return (
+  <main>
+    {/* Debug Status Bar - Remove this before final submission! */}
+    <div style={{ padding: '10px', background: '#f0f0f0', border: '1px solid #ccc' }}>
+      <p>Server Connection: {projects.length > 0 ? "✅ Connected" : "⏳ Loading or Server Offline..."}</p>
+      <p>Projects Found: {projects.length}</p>
     </div>
-  );
-}
 
-export default App;
+    <ProjectForm onAddProject={handleAddProject} />
+    <Search searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+    
+    {/* Requirement: Only map if projects exist to prevent white screen crashes */}
+    {projects.length > 0 ? (
+      <ProjectList projects={displayedProjects} />
+    ) : (
+      <p style={{ textAlign: 'center' }}>No projects found. Check your terminal for Port 3001!</p>
+    )}
+  </main>
+);
