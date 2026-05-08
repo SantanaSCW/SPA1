@@ -1,6 +1,18 @@
 {
   "projects": [
-    { "id": "1", "name": "Code and Cravings", "description": "Restaurant Website", "tech": "HTML/CSS" },
-    { "id": "2", "name": "Calc-IT", "description": "JS Calculator", "tech": "JavaScript" }
+    { 
+      "id": "1", 
+      "name": "Code and Cravings", 
+      "description": "Restaurant Website", 
+      "tech": "HTML/CSS",
+      "image": "https://example.com/project1-screenshot.jpg" 
+    },
+    { 
+      "id": "2", 
+      "name": "Calc-IT", 
+      "description": "JS Calculator", 
+      "tech": "JavaScript",
+      "image": "https://example.com/project2-screenshot.jpg" 
+    }
   ]
 }
