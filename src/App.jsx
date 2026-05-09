@@ -1,4 +1,11 @@
-return (
+ functions ({ onAddProject }) 
+   const [formData, setFormData] = useState({ 
+     name: '', 
+     description: '', 
+     tech: '' 
+   });
+ 
+   return (
   <main>
     {/* Debug Status Bar - Remove this before final submission! */}
     <div style={{ padding: '10px', background: '#f0f0f0', border: '1px solid #ccc' }}>
