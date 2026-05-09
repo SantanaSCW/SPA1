@@ -1,16 +1,18 @@
 import React from 'react';
 
-function SearchBar({ searchTerm, onSearchChange }) {
+function Header({ searchQuery, onSearchChange }) {
   return (
-    <div className="search-bar">
+    <header className="header">
+      <h1>Creative Agency</h1>
       <input
         type="text"
         placeholder="Search projects..."
-        value={searchTerm}
+        value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
+        className="search-bar"
       />
-    </div>
+    </header>
   );
 }
 
-export default SearchBar;
+export default Header;

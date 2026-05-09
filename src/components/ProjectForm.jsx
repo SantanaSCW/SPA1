@@ -1,53 +1,32 @@
 import React, { useState } from 'react';
 
 function ProjectForm({ onAddProject }) {
-  const [formData, setFormData] = useState({ 
-    name: '', 
-    description: '', 
-    tech: '' 
-  });
+  const [formData, setFormData] = useState({ title: '', description: '', image: '', link: '' });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Default tech image if user leaves it blank
+    const techPlaceholder = "https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80";
+    
+    const finalData = {
+      ...formData,
+      image: formData.image.trim() === "" ? techPlaceholder : formData.image
+    };
 
-    if (!formData.name || !formData.description) {
-      alert("Please fill in the name and description!");
-      return;
-    }
-
-    // UPDATE: Changed port from 3000 to 3001
-    fetch("http://localhost:3001/projects", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
-    })
-    .then((res) => res.json())
-    .then((savedProject) => {
-      onAddProject(savedProject); 
-      setFormData({ name: '', description: '', tech: '' }); 
-    })
-    .catch((err) => console.error("Error saving project:", err));
+    onAddProject(finalData);
+    setFormData({ title: '', description: '', image: '', link: '' });
   };
 
   return (
-    <form className="project-form" onSubmit={handleSubmit}>
-      <h3>Add New Project</h3>
-      <input 
-        placeholder="Project Name" 
-        value={formData.name}
-        onChange={(e) => setFormData({...formData, name: e.target.value})}
-      />
-      <input 
-        placeholder="Tech Stack" 
-        value={formData.tech}
-        onChange={(e) => setFormData({...formData, tech: e.target.value})}
-      />
-      <textarea 
-        placeholder="Description" 
-        value={formData.description}
-        onChange={(e) => setFormData({...formData, description: e.target.value})}
-      />
-      <button type="submit">Add Project</button>
+    <form onSubmit={handleSubmit} className="project-form">
+      <input type="text" name="title" placeholder="Project Title" value={formData.title} onChange={handleChange} required />
+      <input type="text" name="description" placeholder="Tech Stack / Description" value={formData.description} onChange={handleChange} required />
+      <input type="text" name="image" placeholder="Image URL (or leave blank for Tech Image)" value={formData.image} onChange={handleChange} />
+      <button type="submit">Publish Project</button>
     </form>
   );
 }
